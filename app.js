@@ -27,6 +27,16 @@ app.post('/submit', function(res, rep) {
     })
 });
 
+app.get('/people', function(res, rep) {
+    fs.readdir('info', function(err, files){
+        if (err) {
+            rep.status(500).send(err);
+        } else {
+            rep.status(200).send(files);
+        }
+    })
+});
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 
