@@ -1,8 +1,19 @@
 <div class="container-fluid">
     <div class="row">
-        <ul>
-            <li ng-repeat="p in people">{{ p }}</li>
-        </ul>
+        <table class="table table-striped">
+            <tr>
+                <th>姓名</th>
+                <th>早茶</th>
+                <th>班会</th>
+                <th>晚餐</th>
+            </tr>
+            <tr ng-repeat="p in people">
+                <td>{{ p.name }}</td>
+                <td ng-class="{'success' : p.breakfast }">{{ p.breakfast?'v':'' }}</td>
+                <td ng-class="{'success' : p.meeting }">{{ p.meeting?'v':'' }}</td>
+                <td ng-class="{'success' : p.dinner }">{{ p.dinner?'v':'' }}</td>
+            </tr>
+        </table>
     </div>
     <button class="btn btn-default" ng-click="gohome()">我要报名</button>
 </div>

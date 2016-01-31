@@ -7,6 +7,8 @@ var express        = require('express')
   , path           = require('path')
     , fs = require('fs');
 
+var async = require('async');
+
 
 var app = express()
 
@@ -32,7 +34,16 @@ app.get('/people', function(res, rep) {
         if (err) {
             rep.status(500).send(err);
         } else {
-            rep.status(200).send(files);
+            var res = [];
+            async.eachLimit(files, 10, function(f, cb) {
+                fs.readFile('info/' + f, 'utf-8', function(err, data){
+                    res.push(JSON.parse(data));
+                    cb(err);
+                });
+            }, function(err) {
+                rep.status(200).send(res);
+            });
+
         }
     })
 });
