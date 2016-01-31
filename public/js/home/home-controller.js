@@ -1,5 +1,5 @@
 angular.module('gathering')
-  .controller('HomeController', function ($scope, $http) {
+  .controller('HomeController', function ($scope, $http, $location) {
 
         $scope.info = {
             name : '',
@@ -23,5 +23,9 @@ angular.module('gathering')
                 $scope.result = '系统错误';
             })
 
+        }
+
+        $scope.see = function(){
+            $location.path('/people')
         }
   });
